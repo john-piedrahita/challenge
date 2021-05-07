@@ -1,9 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const body_parser_1 = require("@/application/middlewares/body-parser");
-const content_type_1 = require("@/application/middlewares/content-type");
-exports.default = (app) => {
-    app.use(body_parser_1.bodyParser);
-    app.use(content_type_1.contentType);
-};
-//# sourceMappingURL=middlewares.js.map
