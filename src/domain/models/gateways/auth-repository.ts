@@ -10,6 +10,6 @@ export namespace IAuthRepository {
 
     export type Result = {
         accessToken: string
-        name: string
+        fullName: string
     }
 }

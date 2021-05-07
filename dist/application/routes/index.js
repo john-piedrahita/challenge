@@ -12,5 +12,6 @@ exports.default = (router) => {
         res.json("Welcome to the world of clean architecture.");
     });
     router.post('/account', express_router_adapter_1.adaptRoute(base_controller_factory_1.makeBaseControllerFactory(constant_1.ADD_USER)));
+    router.post('/login', express_router_adapter_1.adaptRoute(base_controller_factory_1.makeBaseControllerFactory(constant_1.LOGIN)));
 };
 //# sourceMappingURL=index.js.map

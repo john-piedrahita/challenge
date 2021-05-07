@@ -59,6 +59,7 @@ exports.MongoHelper = {
         objectFilter[field] = value;
         let objectQuery = {};
         objectQuery['$set'] = objectFilter;
+        console.log(objectQuery);
         return await collectionResult.updateOne({ _id: param }, objectQuery);
     },
     map: (data) => {

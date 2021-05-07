@@ -15,7 +15,9 @@ export class AuthServiceImpl implements IAuthService {
     }
 
     async auth(data: IAuthService.Params): Promise<IAuthService.Result> {
-        const account = await this.loadUserByEmailRepository.loadGenericByFieldRepository(data.email)
+        const account = await this.loadUserByEmailRepository.loadUserByFieldRepository(data.email)
+        console.log(account)
+
         if (account) {
             const isValid = await this.hashCompare.compare(data.password, account.password)
             if (isValid) {
@@ -23,7 +25,7 @@ export class AuthServiceImpl implements IAuthService {
                 await this.updateAccessTokenRepository.updateTokenRepository(account.id, accessToken)
                 return {
                     accessToken,
-                    name: account.name
+                    fullName: account.fullName
                 }
             }
         }

@@ -1,7 +1,7 @@
 import {Request, Response, Router} from "express";
 import {adaptRoute} from "@/application/config/express-router-adapter";
 import {makeBaseControllerFactory} from "@/infrastructure/entry-points/factories/base-controller-factory";
-import {ADD_USER} from "@/infrastructure/helpers/constant";
+import {ADD_USER, LOGIN} from "@/infrastructure/helpers/constant";
 
 /**
  * Base router "/api/v1"
@@ -13,4 +13,5 @@ export default (router: Router): void => {
     })
 
     router.post('/account', adaptRoute(makeBaseControllerFactory(ADD_USER)))
+    router.post('/login', adaptRoute(makeBaseControllerFactory(LOGIN)))
 }

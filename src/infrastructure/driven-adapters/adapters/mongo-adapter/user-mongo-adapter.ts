@@ -18,8 +18,7 @@ export class UserMongoAdapter implements IMongoInterfacesAdapter {
         return MongoHelper.updateDocumentCollection(id, value, ACCESS_TOKEN_PARAM, USER_COLLECTION)
     }
 
-    async loadGenericByFieldRepository(value: string): Promise<ILoadUserByFieldRepository.Result> {
+    async loadUserByFieldRepository(value: string): Promise<ILoadUserByFieldRepository.Result> {
         return MongoHelper.loadDocumentByFieldCollection(EMAIL_PARAM, value, USER_COLLECTION)
     }
-
 }
