@@ -65,7 +65,6 @@ export const MongoHelper = {
     async update(param, value, field, collectionResult) {
         let objectFilter = {}; objectFilter[field] = value
         let objectQuery = {}; objectQuery['$set'] = objectFilter
-        console.log(objectQuery)
         return await collectionResult.updateOne({_id: param}, objectQuery)
     },
 
