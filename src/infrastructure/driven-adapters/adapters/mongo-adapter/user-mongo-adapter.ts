@@ -2,6 +2,7 @@ import {IMongoInterfacesAdapter} from "@/infrastructure/driven-adapters/adapters
 import {AddUserParams, UserModel} from "@/domain/models/user";
 import {MongoHelper} from "@/infrastructure/driven-adapters/adapters/mongo-adapter/mongo-helper";
 import {ACCESS_TOKEN_PARAM, EMAIL_PARAM, USER_COLLECTION} from "@/infrastructure/driven-adapters/helpers/constants";
+import {ILoadUserByFieldRepository} from "@/domain/models/gateways/load-generic-by-field-repository";
 
 export class UserMongoAdapter implements IMongoInterfacesAdapter {
 
@@ -15,6 +16,10 @@ export class UserMongoAdapter implements IMongoInterfacesAdapter {
 
     async updateTokenRepository(id: string, value: string): Promise<void> {
         return MongoHelper.updateDocumentCollection(id, value, ACCESS_TOKEN_PARAM, USER_COLLECTION)
+    }
+
+    async loadGenericByFieldRepository(value: string): Promise<ILoadUserByFieldRepository.Result> {
+        return MongoHelper.loadDocumentByFieldCollection(EMAIL_PARAM, value, USER_COLLECTION)
     }
 
 }
