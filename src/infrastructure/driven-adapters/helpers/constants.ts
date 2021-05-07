@@ -1,4 +1,6 @@
 export const USER_COLLECTION = 'users'
 export const EMAIL_PARAM = 'email'
+export const ACCESS_TOKEN_PARAM = 'accessToken'
 export const INSERT_DOCUMENT = 'INSERT_DOCUMENT'
 export const LOAD_BY_FIELD = 'LOAD_BY_FIELD'
+export const UPDATE_DOCUMENT = 'UPDATE_DOCUMENT'

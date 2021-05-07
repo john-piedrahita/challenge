@@ -1,5 +1,5 @@
 import {Collection, MongoClient} from "mongodb";
-import {INSERT_DOCUMENT, LOAD_BY_FIELD} from "@/infrastructure/driven-adapters/helpers/constants";
+import {INSERT_DOCUMENT, LOAD_BY_FIELD, UPDATE_DOCUMENT} from "@/infrastructure/driven-adapters/helpers/constants";
 
 export const MongoHelper = {
     client: null as MongoClient,
@@ -33,7 +33,11 @@ export const MongoHelper = {
         return await MongoHelper.queryCollection(LOAD_BY_FIELD, '', collection, field, value)
     },
 
-    async queryCollection(type: string, data: any, collection: string, field?: string, value?: string) {
+    async updateDocumentCollection(id: string, value: string, field: string, collection: string): Promise<void> {
+        return await MongoHelper.queryCollection(UPDATE_DOCUMENT, '', collection, field, value, '')
+    },
+
+    async queryCollection(type: string, data: any, collection: string, field?: string, value?: string, param?: string) {
         const collectionResult = await MongoHelper.getCollection(collection)
 
         switch (type) {
@@ -41,6 +45,9 @@ export const MongoHelper = {
                 return this.insert(data, collectionResult)
             case LOAD_BY_FIELD:
                 return this.loadByField(field, value, collectionResult)
+            case UPDATE_DOCUMENT:
+                return this.update(param, value, field, collectionResult)
+
         }
     },
 
@@ -53,6 +60,12 @@ export const MongoHelper = {
         let objectFilter = {}; objectFilter[field] = value
         const document = await collectionResult.findOne(objectFilter)
         return document && MongoHelper.map(document)
+    },
+
+    async update(param, value, field, collectionResult) {
+        let objectFilter = {}; objectFilter[field] = value
+        let objectQuery = {}; objectQuery['$set'] = objectFilter
+        return await collectionResult.updateOne({_id: param}, objectQuery)
     },
 
     map: (data: any): any => {

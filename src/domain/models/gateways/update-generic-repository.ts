@@ -1,3 +1,3 @@
 export interface IUpdateTokenRepository {
-    updateTokenRepository?: (id: string, value: string) => Promise<void>
+    updateTokenRepository: (id: string, value: string) => Promise<void>
 }

@@ -30,13 +30,18 @@ exports.MongoHelper = {
     async loadDocumentByFieldCollection(field, value, collection) {
         return await exports.MongoHelper.queryCollection(constants_1.LOAD_BY_FIELD, '', collection, field, value);
     },
-    async queryCollection(type, data, collection, field, value) {
+    async updateDocumentCollection(id, value, field, collection) {
+        return await exports.MongoHelper.queryCollection(constants_1.UPDATE_DOCUMENT, '', collection, field, value, '');
+    },
+    async queryCollection(type, data, collection, field, value, param) {
         const collectionResult = await exports.MongoHelper.getCollection(collection);
         switch (type) {
             case constants_1.INSERT_DOCUMENT:
                 return this.insert(data, collectionResult);
             case constants_1.LOAD_BY_FIELD:
                 return this.loadByField(field, value, collectionResult);
+            case constants_1.UPDATE_DOCUMENT:
+                return this.update(param, value, field, collectionResult);
         }
     },
     async insert(data, collectionResult) {
@@ -48,6 +53,13 @@ exports.MongoHelper = {
         objectFilter[field] = value;
         const document = await collectionResult.findOne(objectFilter);
         return document && exports.MongoHelper.map(document);
+    },
+    async update(param, value, field, collectionResult) {
+        let objectFilter = {};
+        objectFilter[field] = value;
+        let objectQuery = {};
+        objectQuery['$set'] = objectFilter;
+        return await collectionResult.updateOne({ _id: param }, objectQuery);
     },
     map: (data) => {
         const { _id, ...rest } = data;
