@@ -15,7 +15,6 @@ export class UserServiceImpl implements IUserService {
 
     async addUserService(data: AddUserParams): Promise<boolean | UserModel> {
         const userExist = await this.checkUserByEmailRepository.checkUserRepository(data.email)
-
         if (userExist) return false
 
         if (!userExist) {

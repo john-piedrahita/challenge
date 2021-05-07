@@ -30,7 +30,7 @@ export const MongoHelper = {
     },
 
     async loadDocumentByFieldCollection(field: string, value: string, collection: string): Promise<any> {
-        return await MongoHelper.queryCollection(LOAD_BY_FIELD, field, value, collection)
+        return await MongoHelper.queryCollection(LOAD_BY_FIELD, '', collection, field, value)
     },
 
     async queryCollection(type: string, data: any, collection: string, field?: string, value?: string) {

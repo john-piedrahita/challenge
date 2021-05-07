@@ -35,7 +35,6 @@ export class AddUserController  implements IController {
             return ok(account)
 
         } catch (e) {
-            console.log(e)
             return serverError(e)
         }
     }

@@ -24,7 +24,7 @@ export const SESSION_SECRET = process.env.JWT_SECRET || ""
 /**
 * Use only if you include jwt
 */
-// if (!SESSION_SECRET) process.exit(1)
+if (!SESSION_SECRET) process.exit(1)
 
 
 /**
