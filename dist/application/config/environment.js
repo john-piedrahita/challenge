@@ -23,7 +23,8 @@ exports.SESSION_SECRET = process.env.JWT_SECRET || "";
 /**
 * Use only if you include jwt
 */
-// if (!SESSION_SECRET) process.exit(1)
+if (!exports.SESSION_SECRET)
+    process.exit(1);
 /**
 |----------------------------------------------------------------------------------------|
     Databases Configuration

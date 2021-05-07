@@ -28,7 +28,7 @@ exports.MongoHelper = {
         return await exports.MongoHelper.queryCollection(constants_1.INSERT_DOCUMENT, data, collection);
     },
     async loadDocumentByFieldCollection(field, value, collection) {
-        return await exports.MongoHelper.queryCollection(constants_1.LOAD_BY_FIELD, field, value, collection);
+        return await exports.MongoHelper.queryCollection(constants_1.LOAD_BY_FIELD, '', collection, field, value);
     },
     async queryCollection(type, data, collection, field, value) {
         const collectionResult = await exports.MongoHelper.getCollection(collection);
